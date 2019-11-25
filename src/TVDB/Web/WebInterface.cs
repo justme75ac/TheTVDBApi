@@ -124,7 +124,7 @@ namespace TVDB.Web
 			XmlDocument doc = new XmlDocument();
 			doc.Load(resultStream);
 
-			XmlNode dataNode = doc.ChildNodes[1];
+			XmlNode dataNode = doc.ChildNodes[doc.ChildNodes.Count-1];
 
 			List<Mirror> receivedMirrors = new List<Mirror>();
 
@@ -231,7 +231,7 @@ namespace TVDB.Web
 
 			XmlDocument doc = new XmlDocument();
 			doc.Load(resultStream);
-			XmlNode dataNode = doc.ChildNodes[1];
+			XmlNode dataNode = doc.ChildNodes[doc.ChildNodes.Count-1];
 
 			List<Language> receivedLanguages = new List<Language>();
 
@@ -349,7 +349,7 @@ namespace TVDB.Web
 
 			XmlDocument doc = new XmlDocument();
 			doc.Load(resultStream);
-			XmlNode dataNode = doc.ChildNodes[1];
+			XmlNode dataNode = doc.ChildNodes[doc.ChildNodes.Count-1];
 
 			List<Series> series = new List<Series>();
 			foreach (XmlNode currentNode in dataNode.ChildNodes)
@@ -483,7 +483,7 @@ namespace TVDB.Web
 			XmlDocument doc = new XmlDocument();
 			doc.Load(resultStream);
 
-			XmlNode dataNode = doc.ChildNodes[1];
+			XmlNode dataNode = doc.ChildNodes[doc.ChildNodes.Count-1];
 
 			List<Series> series = new List<Series>();
 			foreach (XmlNode currentNode in dataNode.ChildNodes)

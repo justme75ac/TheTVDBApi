@@ -8,7 +8,8 @@ namespace TVDB.Model
 {
 	using System;
 	using System.Collections.Generic;
-	using System.Xml;
+    using System.Diagnostics;
+    using System.Xml;
 
 	/// <summary>
 	/// Contains all details for the requested series like Actors, Banners and all episodes of the series.
@@ -80,16 +81,17 @@ namespace TVDB.Model
 
 			// load actors xml.
 			this.actorsDoc = new XmlDocument();
-			this.actorsDoc.Load(System.IO.Path.Combine(this.extractionPath, "actors.xml"));
+            this.actorsDoc.Load(System.IO.Path.Combine(this.extractionPath, "actors.xml"));
 
-			// load banners xml.
-			this.bannersDoc = new XmlDocument();
+            // load banners xml.
+            this.bannersDoc = new XmlDocument();
 			this.bannersDoc.Load(System.IO.Path.Combine(this.extractionPath, "banners.xml"));
 
-			// load series xml.
-			this.languageDoc = new XmlDocument();
+            // load series xml.
+            this.languageDoc = new XmlDocument();
 			this.languageDoc.Load(System.IO.Path.Combine(this.extractionPath, string.Format("{0}.xml", this.Language)));
-		}
+
+        }
 
 		/// <summary>
 		/// Gets or sets the Language property.
@@ -231,7 +233,7 @@ namespace TVDB.Model
 			}
 
 			this.Actors = new List<Actor>();
-			XmlNode actorsNode = this.actorsDoc.ChildNodes[1];
+            XmlNode actorsNode = this.actorsDoc.ChildNodes[this.actorsDoc.ChildNodes.Count-1];
 
 			foreach (XmlNode currentNode in actorsNode)
 			{
@@ -256,7 +258,7 @@ namespace TVDB.Model
 			}
 
 			this.Banners = new List<Banner>();
-			XmlNode bannersNode = this.bannersDoc.ChildNodes[1];
+			XmlNode bannersNode = this.bannersDoc.ChildNodes[this.bannersDoc.ChildNodes.Count-1];
 
 			foreach (XmlNode currentNode in bannersNode.ChildNodes)
 			{
@@ -286,7 +288,7 @@ namespace TVDB.Model
 				this.Series.ActorCollection = new System.Collections.ObjectModel.ObservableCollection<Actor>(this.Actors);
 			}
 
-			XmlNode dataNode = this.languageDoc.ChildNodes[1];
+			XmlNode dataNode = this.languageDoc.ChildNodes[this.languageDoc.ChildNodes.Count-1];
 
 			foreach (XmlNode currentNode in dataNode.ChildNodes)
 			{
