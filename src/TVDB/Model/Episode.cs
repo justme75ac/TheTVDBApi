@@ -1487,6 +1487,7 @@ namespace TVDB.Model
                     int.TryParse(currentNode.InnerText, out result);
                     this.AirsAfterSeason = result;
                     continue;
+                                
                 }
                 else if (currentNode.Name.Equals("airsbefore_season", StringComparison.OrdinalIgnoreCase))
                 {
@@ -1514,7 +1515,15 @@ namespace TVDB.Model
                 }
 			}
 
-			this.Initialize();
+            // Specials handling for TheTVDB return 0 (v3) instead of NULL (v1)
+            if (this.AirsAfterSeason == 0 && this.AirsBeforeSeason == 0 && this.AirsBeforeEpisode == 0)
+            {
+                this.AirsBeforeEpisode = -1;
+                this.AirsAfterSeason = -1;
+                this.AirsBeforeSeason = -1;
+            }
+
+            this.Initialize();
 		}
 
 		/// <summary>
